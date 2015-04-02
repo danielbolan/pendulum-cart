@@ -1,5 +1,5 @@
 ## Pendulum Cart
-###### A toy simulation of a nonholonomic system
+###### A toy simulation of a nonholonomic, underactuated system for the browser
 
 This was built with the intention that it would serve as a platform on which to build/play with different planners. The goal is to have a different planner in each branch.
 
@@ -66,14 +66,14 @@ var s_prime = sim.propagate( s, u ); // should get the same state back
 // ...yes, I know it's a lame example. I'm sorry.
 ```
 
-Positive force means accelerating to the right, and and theta is 0 when the pendulum is facing down. You really get to define you own goal this, but most people will aim to get x to be 0 and theta to be pi.
+------
 
-Most planners have some pretty heavy overhead. Most code typically runs in a single thread in your browser, and if your script takes too long it'll make your page hang and your browser will start bugging you about killing your script. If you have a function that will take a long time to run, consider using [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
+Most planners have some pretty heavy overhead. Any code you write will typically run in a single thread in your browser, and if your script takes too long it'll make your page hang and your browser will start bugging you about killing your script. If you have a function that will take a long time to run, consider using [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
 
 #### Notes
 
 This system is currently deterministic, but I've tried to set things up in such a way that it wouldn't be too bad to add probabilities to the observations and propagation.
 
-This simulation uses RK4 for state propagation. I've heard that Runge-Kutta methods do not play well with conserved values, and that a symplectic integrator is better in these cases. I went with RK4 because I had never implemented it before and I understood it better. It seems to work well for most cases, though if you leave it running over the weekend errors do accrue. On the other hand, if you end up with a plan that requires three days to run I think you might have bigger problems to deal with.
+This simulation uses RK4 for state propagation. I've heard that Runge-Kutta methods do not play well with conserved values, and that a symplectic integrator is better in these cases. I went with RK4 because I had never implemented it before and I understood it better. It seems to work well, though if you leave it running over the weekend errors do accrue. On the other hand, if you end up with a plan that requires three days to run I think you might have bigger problems to deal with.
 
 Pull requests are always welcome.
